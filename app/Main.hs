@@ -12,6 +12,12 @@ main = do
   putStrLn $ "Sums of digits of 3636363636363636: " ++ show (sumsOfDigits 30 3636363636363636)
   putStrLn $ "387483402019012987654321 is divisible by 3: " ++ show (divisibleByThree 387483402019012987654321)
   putStrLn $ "3636363636363636 is divisible by 3: " ++ show (divisibleByThree 3636363636363636)
+  putStrLn $ "387483402019012987654321 is divisible by 4: " ++ show (divisibleByFour 387483402019012987654321)
+  putStrLn $ "3636363636363636 is divisible by 4: " ++ show (divisibleByFour 3636363636363636)
+  putStrLn $ "387483402019012987654321 is divisible by 4: " ++ show (divisibleByFive 387483402019012987654321)
+  putStrLn $ "3636363636363635 is divisible by 4: " ++ show (divisibleByFive 3636363636363635)
+  putStrLn $ "387483402019012987654321 is divisible by 6: " ++ show (divisibleBySix 387483402019012987654321)
+  putStrLn $ "3636363636363636 is divisible by 6: " ++ show (divisibleBySix 3636363636363636)
 
 digits :: Integer -> [Integer]
 digits = map (read . (:[])) . show
@@ -29,3 +35,25 @@ divisibleByThree :: Integer -> Bool
 divisibleByThree i =
   let sums = sumsOfDigits 30 i
   in last sums `mod` 3 == 0
+
+last2 :: [a] -> [a]
+last2 [] = []
+last2 [a] = [a]
+last2 as = [last (init as), last as]
+
+last2Digits :: [Integer] -> Integer
+last2Digits i =
+  if length i >= 2
+  then let [l1, l2] = last2 i
+       in (10 * l1 + l2)
+  else if length i == 1 then head i
+  else 0
+     
+divisibleByFour :: Integer -> Bool
+divisibleByFour i = last2Digits (digits i) `mod` 4 == 0
+
+divisibleByFive :: Integer -> Bool
+divisibleByFive i = last (digits i) `mod` 5 == 0
+
+divisibleBySix :: Integer -> Bool
+divisibleBySix i = divisibleByTwo i && divisibleByThree i
