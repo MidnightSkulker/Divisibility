@@ -32,9 +32,7 @@ sumsOfDigits limit i =
   in current:sumsOfDigits limit current
 
 divisibleByThree :: Integer -> Bool
-divisibleByThree i =
-  let sums = sumsOfDigits 30 i
-  in last sums `mod` 3 == 0
+divisibleByThree i = last (sumsOfDigits 30 i) `mod` 3 == 0
 
 last2 :: [a] -> [a]
 last2 [] = []
