@@ -61,12 +61,15 @@ sumsOfDigits :: Integer -> Integer -> [Integer]
 sumsOfDigits limit i | i < limit = [i]
 sumsOfDigits limit i = let s :: Integer = sum (digits i) in s:sumsOfDigits limit s
 
+-- Reduce the digits iteratively by a function that reduced the integer a
+-- little bit (or possibly more) at each stemp.
 reduceDigitsBy :: ([Integer] -> Integer) -> Integer -> Integer -> [Integer]
 reduceDigitsBy f limit i | i < limit = [i]
 reduceDigitsBy f limit i =
   let next = f (digits i)
   in next:reduceDigitsBy f limit next
 
+-- Test for reduceDigitsBy.
 test1 :: Integer -> [Integer]
 test1 i =
   let f :: [Integer] -> Integer
