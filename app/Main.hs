@@ -1,7 +1,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Main where
 
-import Lib
+import Data.List (unfoldr)
 
 main :: IO ()
 main = do
@@ -19,36 +19,34 @@ main = do
   putStrLn $ "387483402019012987654321 is divisible by 6: " ++ show (divisibleBySix 387483402019012987654321)
   putStrLn $ "3636363636363636 is divisible by 6: " ++ show (divisibleBySix 3636363636363636)
 
+-- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
 digits = map (read . (:[])) . show
 
+-- Convert list of digits back into a single Integer
+fromDigits :: [Integer] -> Integer
+fromDigits = foldl addDigit 0 where addDigit num d = 10*num + d
+
+-- Check if a number is divisible by 2, using the list of digits representation
 divisibleByTwo :: Integer -> Bool
 divisibleByTwo = even . last . digits
 
 sumsOfDigits :: Integer -> Integer -> [Integer]
 sumsOfDigits limit i | i < limit = []
-sumsOfDigits limit i =
-  let current :: Integer = sum (digits i)
-  in current:sumsOfDigits limit current
+sumsOfDigits limit i = let s :: Integer = sum (digits i) in s:sumsOfDigits limit s
 
 divisibleByThree :: Integer -> Bool
 divisibleByThree i = last (sumsOfDigits 30 i) `mod` 3 == 0
 
-last2 :: [a] -> [a]
-last2 [] = []
-last2 [a] = [a]
-last2 as = [last (init as), last as]
+-- Get the last n elements of a list
+lastN :: Int -> [a] -> [a]
+lastN n as = drop (length as - n) as
 
-last2Digits :: [Integer] -> Integer
-last2Digits i =
-  if length i >= 2
-  then let [l1, l2] = last2 i
-       in (10 * l1 + l2)
-  else if length i == 1 then head i
-  else 0
+lastNDigits :: Int -> [Integer] -> Integer
+lastNDigits n i = fromDigits (lastN n i)
      
 divisibleByFour :: Integer -> Bool
-divisibleByFour i = last2Digits (digits i) `mod` 4 == 0
+divisibleByFour i = lastNDigits 2 (digits i) `mod` 4 == 0
 
 divisibleByFive :: Integer -> Bool
 divisibleByFive i = last (digits i) `mod` 5 == 0
