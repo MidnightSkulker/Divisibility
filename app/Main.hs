@@ -31,10 +31,16 @@ fromDigits = foldl addDigit 0 where addDigit num d = 10*num + d
 divisibleByTwo :: Integer -> Bool
 divisibleByTwo = even . last . digits
 
+-- Recursively sum the digits of a number, until the last sum is less thant the limit.
+-- For example:
+--   sumsOfDigits 20 848484848484848482903029840983091231982301289 = [219,12]
+-- So summing the digits of the long number gives 219,
+-- and summing the digits of 219 gives 12.
 sumsOfDigits :: Integer -> Integer -> [Integer]
 sumsOfDigits limit i | i < limit = []
 sumsOfDigits limit i = let s :: Integer = sum (digits i) in s:sumsOfDigits limit s
 
+-- Test if a number is divisible by 3.
 divisibleByThree :: Integer -> Bool
 divisibleByThree i = last (sumsOfDigits 30 i) `mod` 3 == 0
 
@@ -42,14 +48,19 @@ divisibleByThree i = last (sumsOfDigits 30 i) `mod` 3 == 0
 lastN :: Int -> [a] -> [a]
 lastN n as = drop (length as - n) as
 
+-- Get the Integer value of the last three digits of an Integer.
+-- For example: lastNDigits 3 (digits 92375490237354907549) = 549
 lastNDigits :: Int -> [Integer] -> Integer
 lastNDigits n i = fromDigits (lastN n i)
-     
+
+-- Test if a number is divisible by 4.
 divisibleByFour :: Integer -> Bool
 divisibleByFour i = lastNDigits 2 (digits i) `mod` 4 == 0
 
+-- Test if a number is divisible by 5.
 divisibleByFive :: Integer -> Bool
 divisibleByFive i = last (digits i) `mod` 5 == 0
 
+-- Test if a number is divisible by 6.
 divisibleBySix :: Integer -> Bool
 divisibleBySix i = divisibleByTwo i && divisibleByThree i
