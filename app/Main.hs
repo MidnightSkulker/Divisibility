@@ -45,7 +45,7 @@ divisibleByTwo = even . last . digits
 -- So summing the digits of the long number gives 219,
 -- and summing the digits of 219 gives 12.
 sumsOfDigits :: Integer -> Integer -> [Integer]
-sumsOfDigits limit i | i < limit = []
+sumsOfDigits limit i | i < limit = [i]
 sumsOfDigits limit i = let s :: Integer = sum (digits i) in s:sumsOfDigits limit s
 
 -- Test if a number is divisible by 3, using the list of digits representation.
@@ -91,3 +91,9 @@ divisibleByNine i = last (sumsOfDigits 100 i) `mod` 9 == 0
 -- Test if a number is divisible by 10, using the list of digits representation.
 divisibleByTen :: Integer -> Bool
 divisibleByTen i = last (digits i) == 0
+
+-- Alternating Sum of Digits
+alternatingSum :: [Integer] -> Integer
+alternatingSum [] = 0
+alternatingSum [x] = x
+alternatingSum (x1:x2:xs) = x1 - x2 + alternatingSum xs
