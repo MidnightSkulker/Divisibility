@@ -18,6 +18,10 @@ main = do
   putStrLn $ "3636363636363635 is divisible by 4: " ++ show (divisibleByFive 3636363636363635)
   putStrLn $ "387483402019012987654321 is divisible by 6: " ++ show (divisibleBySix 387483402019012987654321)
   putStrLn $ "3636363636363636 is divisible by 6: " ++ show (divisibleBySix 3636363636363636)
+  putStrLn $ "387483402019012987654321 is divisible by 7: " ++ show (divisibleBySeven 387483402019012987654321)
+  putStrLn $ "36363636363636365 is divisible by 7: " ++ show (divisibleBySeven 36363636363636365)
+  putStrLn $ "387483402019012987654324 is divisible by 8: " ++ show (divisibleByEight 387483402019012987654324)
+  putStrLn $ "3636363636363632 is divisible by 8: " ++ show (divisibleByEight 3636363636363632)
 
 -- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
@@ -64,6 +68,13 @@ divisibleByFive i = last (digits i) `mod` 5 == 0
 -- Test if a number is divisible by 6.
 divisibleBySix :: Integer -> Bool
 divisibleBySix i = divisibleByTwo i && divisibleByThree i
+
+-- Test is a number is divisible by 7.
+divisibleBySeven :: Integer -> Bool
+divisibleBySeven i | i < 100 = i `mod` 7 == 0
+divisibleBySeven i =
+  let d = digits i
+  in divisibleBySeven (fromDigits (init d) - (2 * last d))
 
 -- Test if a number is divisible by 8.
 divisibleByEight :: Integer -> Bool
