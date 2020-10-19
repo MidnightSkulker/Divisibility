@@ -22,6 +22,8 @@ main = do
   putStrLn $ "36363636363636365 is divisible by 7: " ++ show (divisibleBySeven 36363636363636365)
   putStrLn $ "387483402019012987654324 is divisible by 8: " ++ show (divisibleByEight 387483402019012987654324)
   putStrLn $ "3636363636363632 is divisible by 8: " ++ show (divisibleByEight 3636363636363632)
+  putStrLn $ "387483402019012987654324 is divisible by 9: " ++ show (divisibleByNine 387483402019012987654324)
+  putStrLn $ "3636363636363636 is divisible by 9: " ++ show (divisibleByNine 3636363636363636)
 
 -- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
@@ -44,7 +46,7 @@ sumsOfDigits :: Integer -> Integer -> [Integer]
 sumsOfDigits limit i | i < limit = []
 sumsOfDigits limit i = let s :: Integer = sum (digits i) in s:sumsOfDigits limit s
 
--- Test if a number is divisible by 3.
+-- Test if a number is divisible by 3, using the list of digits representation.
 divisibleByThree :: Integer -> Bool
 divisibleByThree i = last (sumsOfDigits 30 i) `mod` 3 == 0
 
@@ -57,25 +59,29 @@ lastN n as = drop (length as - n) as
 lastNDigits :: Int -> [Integer] -> Integer
 lastNDigits n i = fromDigits (lastN n i)
 
--- Test if a number is divisible by 4.
+-- Test if a number is divisible by 4, using the list of digits representation.
 divisibleByFour :: Integer -> Bool
 divisibleByFour i = lastNDigits 2 (digits i) `mod` 4 == 0
 
--- Test if a number is divisible by 5.
+-- Test if a number is divisible by 5, using the list of digits representation.
 divisibleByFive :: Integer -> Bool
 divisibleByFive i = last (digits i) `mod` 5 == 0
 
--- Test if a number is divisible by 6.
+-- Test if a number is divisible by 6, using the list of digits representation.
 divisibleBySix :: Integer -> Bool
 divisibleBySix i = divisibleByTwo i && divisibleByThree i
 
--- Test is a number is divisible by 7.
+-- Test is a number is divisible by 7, using the list of digits representation.
 divisibleBySeven :: Integer -> Bool
 divisibleBySeven i | i < 100 = i `mod` 7 == 0
 divisibleBySeven i =
   let d = digits i
   in divisibleBySeven (fromDigits (init d) - (2 * last d))
 
--- Test if a number is divisible by 8.
+-- Test if a number is divisible by 8, using the list of digits representation.
 divisibleByEight :: Integer -> Bool
 divisibleByEight i = lastNDigits 3 (digits i) `mod` 8 == 0
+
+-- Test if a number is divisible by 9, using the list of digits representation.
+divisibleByNine :: Integer -> Bool
+divisibleByNine i = last (sumsOfDigits 100 i) `mod` 9 == 0
