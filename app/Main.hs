@@ -18,14 +18,21 @@ main = do
   putStrLn $ "3636363636363635 is divisible by 4: " ++ show (divisibleByFive 3636363636363635)
   putStrLn $ "387483402019012987654321 is divisible by 6: " ++ show (divisibleBySix 387483402019012987654321)
   putStrLn $ "3636363636363636 is divisible by 6: " ++ show (divisibleBySix 3636363636363636)
+
   putStrLn $ "387483402019012987654321 is divisible by 7: " ++ show (divisibleBySeven 387483402019012987654321)
   putStrLn $ "36363636363636365 is divisible by 7: " ++ show (divisibleBySeven 36363636363636365)
+
   putStrLn $ "387483402019012987654324 is divisible by 8: " ++ show (divisibleByEight 387483402019012987654324)
   putStrLn $ "3636363636363632 is divisible by 8: " ++ show (divisibleByEight 3636363636363632)
+
   putStrLn $ "387483402019012987654324 is divisible by 9: " ++ show (divisibleByNine 387483402019012987654324)
   putStrLn $ "3636363636363636 is divisible by 9: " ++ show (divisibleByNine 3636363636363636)
+
   putStrLn $ "387483402019012987654324 is divisible by 10: " ++ show (divisibleByTen 387483402019012987654324)
   putStrLn $ "36363636363636360 is divisible by 10: " ++ show (divisibleByTen 36363636363636360)
+
+  putStrLn $ "387483402019012987654324 is divisible by 11: " ++ show (divisibleByEleven 387483402019012987654324)
+  putStrLn $ "36363636363636362 is divisible by 11: " ++ show (divisibleByEleven 36363636363636362)
 
 -- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
@@ -97,3 +104,8 @@ alternatingSum :: [Integer] -> Integer
 alternatingSum [] = 0
 alternatingSum [x] = x
 alternatingSum (x1:x2:xs) = x1 - x2 + alternatingSum xs
+
+-- Test if a number is divisible by 11, using the list of digits representation.
+divisibleByEleven :: Integer -> Bool
+divisibleByEleven i = alternatingSum (digits i) `mod` 11 == 0
+
