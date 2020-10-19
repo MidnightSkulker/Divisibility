@@ -37,6 +37,9 @@ main = do
   putStrLn $ "387483402019012987654324 is divisible by 11: " ++ show (divisibleByEleven 387483402019012987654324)
   putStrLn $ "36363636363636362 is divisible by 11: " ++ show (divisibleByEleven 36363636363636362)
 
+  putStrLn $ "387483402019012987654324 is divisible by 12: " ++ show (divisibleByTwelve 387483402019012987654324)
+  putStrLn $ "36363636363636362 is divisible by 12: " ++ show (divisibleByTwelve 36363636363636362)
+
 -- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
 digits = map (read . (:[])) . show
@@ -57,6 +60,18 @@ divisibleByTwo = even . last . digits
 sumsOfDigits :: Integer -> Integer -> [Integer]
 sumsOfDigits limit i | i < limit = [i]
 sumsOfDigits limit i = let s :: Integer = sum (digits i) in s:sumsOfDigits limit s
+
+reduceDigitsBy :: ([Integer] -> Integer) -> Integer -> Integer -> [Integer]
+reduceDigitsBy f limit i | i < limit = [i]
+reduceDigitsBy f limit i =
+  let next = f (digits i)
+  in next:reduceDigitsBy f limit next
+
+test1 :: Integer -> [Integer]
+test1 i =
+  let f :: [Integer] -> Integer
+      f is = fromDigits (init is) - (2 * last is)
+  in reduceDigitsBy f 100 i
 
 -- Test if a number is divisible by 3, using the list of digits representation.
 divisibleByThree :: Integer -> Bool
@@ -112,3 +127,6 @@ alternatingSum (x1:x2:xs) = x1 - x2 + alternatingSum xs
 divisibleByEleven :: Integer -> Bool
 divisibleByEleven i = alternatingSum (digits i) `mod` 11 == 0
 
+-- Test if a number is divisible by 12, using the list of digits representation.
+divisibleByTwelve :: Integer -> Bool
+divisibleByTwelve i = divisibleByThree i && divisibleByFour i
