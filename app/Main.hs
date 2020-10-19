@@ -24,6 +24,8 @@ main = do
   putStrLn $ "3636363636363632 is divisible by 8: " ++ show (divisibleByEight 3636363636363632)
   putStrLn $ "387483402019012987654324 is divisible by 9: " ++ show (divisibleByNine 387483402019012987654324)
   putStrLn $ "3636363636363636 is divisible by 9: " ++ show (divisibleByNine 3636363636363636)
+  putStrLn $ "387483402019012987654324 is divisible by 10: " ++ show (divisibleByTen 387483402019012987654324)
+  putStrLn $ "36363636363636360 is divisible by 10: " ++ show (divisibleByTen 36363636363636360)
 
 -- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
@@ -85,3 +87,7 @@ divisibleByEight i = lastNDigits 3 (digits i) `mod` 8 == 0
 -- Test if a number is divisible by 9, using the list of digits representation.
 divisibleByNine :: Integer -> Bool
 divisibleByNine i = last (sumsOfDigits 100 i) `mod` 9 == 0
+
+-- Test if a number is divisible by 10, using the list of digits representation.
+divisibleByTen :: Integer -> Bool
+divisibleByTen i = last (digits i) == 0
