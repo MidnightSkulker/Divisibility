@@ -64,3 +64,7 @@ divisibleByFive i = last (digits i) `mod` 5 == 0
 -- Test if a number is divisible by 6.
 divisibleBySix :: Integer -> Bool
 divisibleBySix i = divisibleByTwo i && divisibleByThree i
+
+-- Test if a number is divisible by 8.
+divisibleByEight :: Integer -> Bool
+divisibleByEight i = lastNDigits 3 (digits i) `mod` 8 == 0
