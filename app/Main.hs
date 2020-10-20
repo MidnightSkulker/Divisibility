@@ -68,6 +68,9 @@ reduceDigitsBy f limit i | i < limit = [i]
 reduceDigitsBy f limit i =
   let next = f (digits i)
   in next:reduceDigitsBy f limit next
+-- reduceDigitsBy f limit i | i < limit = [i]
+-- reduceDigitsBy f limit i = f i: reduceDigitsBy f limit (f i)
+-- reduceDigitsBy f limit i = foldr (f limit) i 
 
 -- Test for reduceDigitsBy.
 test1 :: Integer -> [Integer]
@@ -104,9 +107,19 @@ divisibleBySix i = divisibleByTwo i && divisibleByThree i
 -- Test is a number is divisible by 7, using the list of digits representation.
 divisibleBySeven :: Integer -> Bool
 divisibleBySeven i | i < 100 = i `mod` 7 == 0
-divisibleBySeven i =
-  let d = digits i
-  in divisibleBySeven (fromDigits (init d) - (2 * last d))
+divisibleBySeven i = last (inflateForSeven i) `mod` 7 == 0
+
+-- Reduce the integer to be tested for divisibility by 7 by one application
+-- of the rule for seven.
+nextForSeven :: Integer -> Maybe (Integer, Integer)
+nextForSeven j | j <= 70 = Nothing
+nextForSeven j =
+  let next = fromDigits (init (digits j)) - 2 * last (digits j)
+  in  Just (next, next)
+
+-- Produce all of the reduced integers for seven.
+inflateForSeven :: Integer -> [Integer]
+inflateForSeven i =unfoldr nextForSeven i
 
 -- Test if a number is divisible by 8, using the list of digits representation.
 divisibleByEight :: Integer -> Bool
