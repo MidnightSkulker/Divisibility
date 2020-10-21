@@ -1,4 +1,4 @@
-module Test where
+module Main where
 
 import Test.HUnit
 -- import Main(sumsOfDigits)

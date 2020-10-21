@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b673fe13667b178713805f279a85caa2088e4f2d1b322b978ca8aa8d0996c956
+-- hash: 6bb785aab431914657259bd2cc286437c20c66749657830fba0c2877be61b92f
 
 name:           Divisibility
 version:        0.1.0.0
@@ -55,7 +55,7 @@ test-suite Divisibility-test
       Paths_Divisibility
   hs-source-dirs:
       test
-  ghc-options: -main-is Test -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       Divisibility
     , HUnit
