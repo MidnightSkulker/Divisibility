@@ -6,16 +6,6 @@ import Lib
 
 main :: IO ()
 main = do
-  putStrLn $ "387483402019012987654321 is divisible by 4: " ++ show (divisibleByFour 387483402019012987654321)
-  putStrLn $ "3636363636363636 is divisible by 4: " ++ show (divisibleByFour 3636363636363636)
-  putStrLn $ "387483402019012987654321 is divisible by 5: " ++ show (divisibleByFive 387483402019012987654321)
-  putStrLn $ "3636363636363635 is divisible by 5: " ++ show (divisibleByFive 3636363636363635)
-
-  putStrLn $ "387483402019012987654321 is divisible by 6: " ++ show (divisibleBySix 387483402019012987654321)
-  putStrLn $ "3636363636363636 is divisible by 6: " ++ show (divisibleBySix 3636363636363636)
-
-  putStrLn $ "387483402019012987654321 is divisible by 7: " ++ show (divisibleBySeven 387483402019012987654321)
-  putStrLn $ "36363636363636365 is divisible by 7: " ++ show (divisibleBySeven 36363636363636365)
 
   putStrLn $ "387483402019012987654324 is divisible by 8: " ++ show (divisibleByEight 387483402019012987654324)
   putStrLn $ "3636363636363632 is divisible by 8: " ++ show (divisibleByEight 3636363636363632)
