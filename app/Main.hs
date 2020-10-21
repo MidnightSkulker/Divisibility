@@ -39,6 +39,8 @@ main = do
 
   putStrLn $ "387483402019012987654324 is divisible by 12: " ++ show (divisibleByTwelve 387483402019012987654324)
   putStrLn $ "36363636363636362 is divisible by 12: " ++ show (divisibleByTwelve 36363636363636362)
+  putStrLn $ "387483402019012987654324 is divisible by 13: " ++ show (divisibleByThirteen 387483402019012987654324)
+  putStrLn $ "36363636363636361 is divisible by 13: " ++ show (divisibleByThirteen 36363636363636361)
 
 -- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
@@ -146,3 +148,20 @@ divisibleByEleven i = alternatingSum (digits i) `mod` 11 == 0
 -- Test if a number is divisible by 12, using the list of digits representation.
 divisibleByTwelve :: Integer -> Bool
 divisibleByTwelve i = divisibleByThree i && divisibleByFour i
+
+-- Reduce the integer to be tested for divisibility by 13 by one application
+-- of the rule for seven.
+nextForThirteen :: Integer -> Maybe (Integer, Integer)
+nextForThirteen j | j <= 130 = Nothing
+nextForThirteen j =
+  let next = fromDigits (init (digits j)) - 9 * last (digits j)
+  in  Just (next, next)
+
+-- Produce all of the reduced integers for 13.
+inflateForThirteen :: Integer -> [Integer]
+inflateForThirteen i =unfoldr nextForThirteen i
+
+-- Test is a number is divisible by 13, using the list of digits representation.
+divisibleByThirteen :: Integer -> Bool
+divisibleByThirteen i | i < 100 = i `mod` 13 == 0
+divisibleByThirteen i = last (inflateForThirteen i) `mod` 13 == 0
