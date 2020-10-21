@@ -35,7 +35,7 @@ testDiv5_2 = TestCase $ assertEqual "divisibleByFive.1" (divisibleByFive 3636363
 
 testDiv6_1 :: Test
 testDiv6_1 =
-  TestCase $ assertEqual "divisiblBySix.2" (divisibleBySix 387483402019012987654321) False
+  TestCase $ assertEqual "divisiblBySix.1" (divisibleBySix 387483402019012987654321) False
 
 testDiv6_2 :: Test
 testDiv6_2 = TestCase $ assertEqual "divisiblBySix.2" (divisibleBySix 3636363636363636) True
@@ -45,6 +45,19 @@ testDiv7_1 =
   TestCase $ assertEqual "divisibleBySeven.1" (divisibleBySeven 387483402019012987654321) False
 testDiv7_2 :: Test
 testDiv7_2 = TestCase $ assertEqual "divisibleBySeven.1" (divisibleBySeven 36363636363636365) True
+
+testDiv8_1 :: Test
+testDiv8_1 =
+  TestCase $ assertEqual "divisiblByEight.1" (divisibleByEight 387483402019012987654324) False
+
+testDiv8_2 :: Test
+testDiv8_2 = TestCase $ assertEqual "divisiblByEight.2" (divisibleByEight 3636363636363632) True
+
+testDiv9_1 :: Test
+testDiv9_1 =
+  TestCase $ assertEqual "divisibleByNine.1" (divisibleByNine 387483402019012987654324) False
+testDiv9_2 :: Test
+testDiv9_2 = TestCase $ assertEqual "divisibleByNine.2" (divisibleByNine 3636363636363636) True
 
 
 tests :: Test = TestList [ TestLabel "divisible by 2 - #1" testDiv2_1
@@ -59,4 +72,8 @@ tests :: Test = TestList [ TestLabel "divisible by 2 - #1" testDiv2_1
                          , TestLabel "divisible by 6 - #2" testDiv6_2
                          , TestLabel "divisible by 7 - #1" testDiv7_1
                          , TestLabel "divisible by 7 - #2" testDiv7_2
+                         , TestLabel "divisible by 8 - #1" testDiv8_1
+                         , TestLabel "divisible by 8 - #2" testDiv8_2
+                         , TestLabel "divisible by 9 - #1" testDiv9_1
+                         , TestLabel "divisible by 9 - #2" testDiv9_2
                          ]
