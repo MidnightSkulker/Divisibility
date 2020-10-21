@@ -60,6 +60,32 @@ testDiv9_2 :: Test
 testDiv9_2 = TestCase $ assertEqual "divisibleByNine.2" (divisibleByNine 3636363636363636) True
 
 
+testDiv10_1 =
+  TestCase $ assertEqual "divisibleByTen.1" (divisibleByTen 387483402019012987654324) False
+testDiv10_2 :: Test
+testDiv10_2 = TestCase $ assertEqual "divisibleByTen.2" (divisibleByTen 36363636363636360) True
+
+testDiv11_1 :: Test
+testDiv11_1 =
+  TestCase $ assertEqual "divisibleByEleven.1" (divisibleByEleven 387483402019012987654324) False
+testDiv11_2 :: Test
+testDiv11_2 =
+  TestCase $ assertEqual "divisibleByEleven.2" (divisibleByEleven 36363636363636362) True
+
+testDiv12_1 :: Test
+testDiv12_1 =
+  TestCase $ assertEqual "divisibleByTwelve.1" (divisibleByTwelve 387483402019012987654324) False
+testDiv12_2 :: Test
+testDiv12_2 =
+  TestCase $ assertEqual "divisibleByTwelve.2" (divisibleByTwelve 36363636363636372) True
+
+testDiv13_1 :: Test
+testDiv13_1 =
+  TestCase $ assertEqual "divisibleByThirteen.1" (divisibleByThirteen 387483402019012987654324) False
+testDiv13_2 :: Test
+testDiv13_2 =
+  TestCase $ assertEqual "divisibleByThirteen.2" (divisibleByThirteen 36363636363636361) True
+
 tests :: Test = TestList [ TestLabel "divisible by 2 - #1" testDiv2_1
                          , TestLabel "divisible by 2 - #2" testDiv2_2
                          , TestLabel "divisible by 3 - #1" testDiv3_1
@@ -76,4 +102,12 @@ tests :: Test = TestList [ TestLabel "divisible by 2 - #1" testDiv2_1
                          , TestLabel "divisible by 8 - #2" testDiv8_2
                          , TestLabel "divisible by 9 - #1" testDiv9_1
                          , TestLabel "divisible by 9 - #2" testDiv9_2
+                         , TestLabel "divisible by 10 - #1" testDiv10_1
+                         , TestLabel "divisible by 10 - #2" testDiv10_2
+                         , TestLabel "divisible by 11 - #1" testDiv11_1
+                         , TestLabel "divisible by 11 - #2" testDiv11_2
+                         , TestLabel "divisible by 12 - #1" testDiv12_1
+                         , TestLabel "divisible by 12 - #2" testDiv12_2
+                         , TestLabel "divisible by 13 - #1" testDiv13_1
+                         , TestLabel "divisible by 13 - #2" testDiv13_2
                          ]
