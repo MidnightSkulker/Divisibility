@@ -31,16 +31,6 @@ reduceDigitsBy f limit i | i < limit = [i]
 reduceDigitsBy f limit i =
   let next = f (digits i)
   in next:reduceDigitsBy f limit next
--- reduceDigitsBy f limit i | i < limit = [i]
--- reduceDigitsBy f limit i = f i: reduceDigitsBy f limit (f i)
--- reduceDigitsBy f limit i = foldr (f limit) i 
-
--- Test for reduceDigitsBy.
-test1 :: Integer -> [Integer]
-test1 i =
-  let f :: [Integer] -> Integer
-      f is = fromDigits (init is) - (2 * last is)
-  in reduceDigitsBy f 100 i
 
 -- Test if a number is divisible by 3, using the list of digits representation.
 divisibleByThree :: Integer -> Bool

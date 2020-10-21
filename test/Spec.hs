@@ -1,10 +1,18 @@
+{-# LANGUAGE ScopedTypeVariables #-}
 module Main where
 
 import Test.HUnit
--- import Main(sumsOfDigits)
+import Lib
 
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = do
+  putStrLn "Testing Divisibility Rules for Yamuhat Kids"
+  n <- runTestTT tests
+  return ()
 
-testFoo :: Test
-testFoo = TestCase $ assertEqual "Should return 2" 5 2
+testDiv2_1 :: Test
+testDiv2_1 = TestCase $ assertEqual "divisibleByTwo.1" (divisibleByTwo 93457983475984) True
+testDiv2_2 :: Test
+testDiv2_2 = TestCase $ assertEqual "divisibleByTwo.2" (divisibleByTwo 93457983475985) False
+tests :: Test = TestList [ TestLabel "divisible by 2 - #1" testDiv2_1
+                         , TestLabel "divisible by 2 - #2" testDiv2_2 ]
