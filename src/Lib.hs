@@ -1,7 +1,10 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Lib where
 
-import Data.List (unfoldr)
+import Data.List (unfoldr, intercalate)
+
+niceList :: (Show a) => [a] -> String
+niceList as = intercalate "\n" (map show as)
 
 -- Convert an Integer into a list of digitsn
 digits :: Integer -> [Integer]
@@ -110,7 +113,7 @@ nextForThirteen j =
 
 -- Produce all of the reduced integers for 13.
 inflateForThirteen :: Integer -> [Integer]
-inflateForThirteen i =unfoldr nextForThirteen i
+inflateForThirteen i = unfoldr nextForThirteen i
 
 -- Test is a number is divisible by 13, using the list of digits representation.
 divisibleByThirteen :: Integer -> Bool
